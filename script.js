@@ -57,7 +57,7 @@ function fetchNews(isSearching) {
                         </div>
                         <h2>${article.title}</h2>
                         <p>${article.description}</p>
-                        <a href="${article.url}" target="_blank">Read More</a>
+                        <a href="${article.url}" target="_blank">자세히보기</a>
                     </div>
                 `;
 
