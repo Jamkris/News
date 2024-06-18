@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>찜한 뉴스</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>찜한 뉴스</h1>
+			<a href="index.html">뉴스 보기</a>
+			<div id="wishlistContainer"></div>
+		</div>
+		<script>
+			function loadWishlist() {
+			    const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+			    const wishlistContainer = document.getElementById('wishlistContainer');
+			    if (wishlist.length === 0) {
+			        wishlistContainer.innerHTML = '<p>찜한 뉴스가 없습니다.</p>';
+			        return;
+			    }
+			    wishlistContainer.innerHTML = '';
+			    wishlist.forEach(article => {
+			        const newsItem = document.createElement('div');
+			        newsItem.className = 'newsItem';
+			        newsItem.innerHTML = `
+			            <div class="newsImage">
+			                <img src="${article.urlToImage}" alt="${article.title}">
+			            </div>
+			            <div class="newsContent">
+			                <div class="info">
+			                    <h5>${article.source.name}</h5>
+			                    <span>|</span>
+			                    <h5>${article.publishedAt}</h5>
+			                </div>
+			                <h2>${article.title}</h2>
+			                <p>${article.description}</p>
+			                <a href="${article.url}" target="_blank">자세히 보기</a>
+			            </div>
+			        `;
+
+			        const removeButton = document.createElement('button');
+			        removeButton.textContent = '찜 제거';
+			        removeButton.onclick = () => removeFromWishlist(article.url);
+
+			        newsItem.querySelector('.newsContent').appendChild(removeButton);
+			        wishlistContainer.appendChild(newsItem);
+			    });
+			}
+
+			function removeFromWishlist(articleUrl) {
+			    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+			    wishlist = wishlist.filter(article => article.url !== articleUrl);
+			    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+			    loadWishlist();
+			    alert('뉴스가 찜목록에서 제거되었습니다.');
+			}
+
+			window.onload = loadWishlist;
+		</script>
+	</body>
+</html>

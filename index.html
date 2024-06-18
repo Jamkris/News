@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>뉴스 찾기</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>해외뉴스를 한눈에!!!</h1>
+			<a href="wish.html">찜한 뉴스 보기</a>
+			<div class="selectionContainer">
+				<label for="category">카테고리를 선택해주세요</label>
+				<select id="category">
+					<option value="business">경제</option>
+					<option value="entertainment">연예</option>
+					<option value="general">사회</option>
+					<option value="health">건강</option>
+					<option value="science">과학</option>
+					<option value="sports">스포츠</option>
+					<option value="technology">IT</option>
+				</select>
+				<button id="fetchCategory">카테고리로 검색</button>
+			</div>
+			<div class="searchContainer">
+				<input
+					type="text"
+					id="searchKeyword"
+					placeholder="검색어를 입력해주세요."
+				/>
+				<button onclick="fetchNews(true)">검색</button>
+			</div>
+			<div id="newsContainer"></div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>
